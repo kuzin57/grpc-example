@@ -1,0 +1,16 @@
+services:
+  gateway:
+    ports:
+      - "127.0.0.1:10342:9090/tcp"
+    build:
+      dockerfile: ./services/gateway/deployment/Dockerfile
+      context: ./
+
+  db:
+    restart: always
+    image: scylladb/scylla:latest
+    volumes:
+      - ./.database/scylla-db/data:/var/lib/scylla-db/data
+    ports:
+      - 9042:9042
+
